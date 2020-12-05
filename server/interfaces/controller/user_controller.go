@@ -36,3 +36,20 @@ func (controller *UserController) CreateUser(c Context) {
 	}
 	c.JSON(200, gateway.CreateUserInfoOutputFromUser(user))
 }
+
+func (controller *UserController) DeleteUser(c Context) {
+	input := gateway.UserInput{}
+	err := c.ShouldBindJSON(&input)
+	if err != nil {
+		controller.logger.Error(err.Error())
+		c.JSON(400, gateway.StatusMessageOutput{false, "Parameter is invalid."})
+		return
+	}
+	user, err := controller.interactor.Delete(input.GetUser())
+	if err != nil {
+		controller.logger.Error(err.Error())
+		c.JSON(500, gateway.StatusMessageOutput{false, "Failed to delete account."})
+		return
+	}
+	c.JSON(200, gateway.DeleteUserInfoOutputFromUser(user))
+}
