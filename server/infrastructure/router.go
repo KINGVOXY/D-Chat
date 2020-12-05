@@ -30,6 +30,9 @@ func init() {
 	// parameter: gateway.UserInput
 	// response: gateway.UserInfoOutput
 	v1.POST("/users", func(c *gin.Context) { userController.CreateUser(c) })
+	// parameter: gateway.UserInput
+	// response: gateway.UserInfoOutput
+	v1.POST("/delete", func(c *gin.Context) { userController.DeleteUser(c) })
 
 	router.GET("/", func(c *gin.Context) {
 		c.JSON(200, gin.H{
