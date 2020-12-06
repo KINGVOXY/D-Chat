@@ -8,13 +8,27 @@ type UserInfoOutput struct {
 	Name       string          `json:"name"`
 	Mail       string          `json:"mail"`
 	Bio        string          `json:"bio"`
-	Del		   bool			   `json: del`
+	Del		   bool			   `json:"del"`
 	Status     string          `json:"status"`
 	StatusText string          `json:"statusText"`
 	Auth       domain.AuthType `json:"auth"`
 }
 
 func CreateUserInfoOutputFromUser(user domain.User) UserInfoOutput {
+	return UserInfoOutput{
+		user.Id,
+		user.UserId,
+		user.Name,
+		user.Mail,
+		user.Bio,
+		user.Del,
+		user.Status,
+		user.StatusText,
+		user.Auth,
+	}
+}
+
+func DeleteUserInfoOutputFromUser(user domain.User) UserInfoOutput {
 	return UserInfoOutput{
 		user.Id,
 		user.UserId,
