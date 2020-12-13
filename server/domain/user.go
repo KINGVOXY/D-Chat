@@ -14,7 +14,7 @@ type User struct {
 	Password   string
 	Mail       string
 	Bio        string
-	Del		   bool
+	Delete	   bool
 	Status     string
 	StatusText string
 	Auth       AuthType
